@@ -1,4 +1,5 @@
-﻿using Chatty.Api.Hubs;
+﻿using Chatty.Api.Authorization;
+using Chatty.Api.Hubs;
 using Chatty.Api.Hubs.Clients;
 using Chatty.Api.Models;
 using Microsoft.AspNetCore.Http;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace Chatty.Api.Controllers
 {
+    //[Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class ChatController : ControllerBase
