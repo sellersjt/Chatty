@@ -24,5 +24,14 @@ namespace Chatty.Api.Helpers
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Room> Rooms { get; set; }
+        public DbSet<Message> Messages { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<RoomUser>().HasKey(x => new { x.RoomId, x.UserId });
+        }
     }
 }

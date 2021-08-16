@@ -6,20 +6,10 @@ using System.Threading.Tasks;
 
 namespace Chatty.Api.Models.Users
 {
-    public class RegisterRequest
+    public class AuthenticateRequestModel
     {
         [Required]
-        public string FirstName { get; set; }
-
-        [Required]
-        public string LastName { get; set; }
-
-        [Required]
         public string Username { get; set; }
-
-        [Required]
-        public string EmailAddress { get; set; }
-        public string PhoneNumber { get; set; }
 
         [Required]
         public string Password { get; set; }

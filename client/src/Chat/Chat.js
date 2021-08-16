@@ -38,7 +38,7 @@ const Chat = () => {
     };
 
     try {
-      await fetch("https://localhost:5001/api/chat/messages", {
+      await fetch("https://localhost:5001/api/chat/sendMessage", {
         method: "POST",
         body: JSON.stringify(chatMessage),
         headers: {

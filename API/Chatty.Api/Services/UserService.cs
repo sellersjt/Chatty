@@ -11,16 +11,6 @@ using System.Threading.Tasks;
 
 namespace Chatty.Api.Services
 {
-    public interface IUserService
-    {
-        AuthenticateResponse Authenticate(AuthenticateRequest model);
-        IEnumerable<User> GetAll();
-        User GetById(int id);
-        void Register(RegisterRequest model);
-        void Update(int id, UpdateRequest model);
-        void Delete(int id);
-    }
-
     public class UserService : IUserService
     {
         private DataContext _context;
@@ -37,7 +27,7 @@ namespace Chatty.Api.Services
             _mapper = mapper;
         }
 
-        public AuthenticateResponse Authenticate(AuthenticateRequest model)
+        public AuthenticateResponseModel Authenticate(AuthenticateRequestModel model)
         {
             var user = _context.Users.SingleOrDefault(x => x.Username == model.Username);
 
@@ -46,7 +36,7 @@ namespace Chatty.Api.Services
                 throw new AppException("Username or password is incorrect");
 
             // authentication successful
-            var response = _mapper.Map<AuthenticateResponse>(user);
+            var response = _mapper.Map<AuthenticateResponseModel>(user);
             response.JwtToken = _jwtUtils.GenerateToken(user);
             return response;
         }
@@ -61,7 +51,7 @@ namespace Chatty.Api.Services
             return getUser(id);
         }
 
-        public void Register(RegisterRequest model)
+        public void Register(RegisterRequestModel model)
         {
             // validate
             if (_context.Users.Any(x => x.Username == model.Username))
@@ -85,7 +75,7 @@ namespace Chatty.Api.Services
             _context.SaveChanges();
         }
 
-        public void Update(int id, UpdateRequest model)
+        public void Update(int id, UpdateRequestModel model)
         {
             var user = getUser(id);
 

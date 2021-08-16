@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Chatty.Api.Entities;
+using Chatty.Api.Models.Rooms;
 using Chatty.Api.Models.Users;
 using System;
 using System.Collections.Generic;
@@ -12,14 +13,14 @@ namespace Chatty.Api.Helpers
     {
         public AutoMapperProfile()
         {
-            // User -> AuthenticateResponse
-            CreateMap<User, AuthenticateResponse>();
+            // User -> AuthenticateResponseModel
+            CreateMap<User, AuthenticateResponseModel>();
 
-            // RegisterRequest -> User
-            CreateMap<RegisterRequest, User>();
+            // RegisterRequestModel -> User
+            CreateMap<RegisterRequestModel, User>();
 
-            // UpdateRequest -> User
-            CreateMap<UpdateRequest, User>()
+            // UpdateRequestModel -> User
+            CreateMap<UpdateRequestModel, User>()
                 .ForAllMembers(x => x.Condition(
                     (src, dest, prop) =>
                     {
@@ -30,6 +31,15 @@ namespace Chatty.Api.Helpers
                         return true;
                     }
                 ));
+
+            // Room -> RoomListModel
+            CreateMap<Room, RoomListModel>();
+
+            // Room -> RoomChatMedel
+            CreateMap<Room, RoomChatModel>();
+
+            // RoomCreateModel => Room
+            CreateMap<RoomCreateModel, Room>();
         }
     }
 }

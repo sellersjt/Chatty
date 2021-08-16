@@ -34,7 +34,7 @@ namespace Chatty.Api.Controllers
 
         [AllowAnonymous]
         [HttpPost("authenticate")]
-        public IActionResult Authenticate(AuthenticateRequest model)
+        public IActionResult Authenticate(AuthenticateRequestModel model)
         {
             var response = _userService.Authenticate(model);
             return Ok(response);
@@ -42,7 +42,7 @@ namespace Chatty.Api.Controllers
 
         [AllowAnonymous]
         [HttpPost("register")]
-        public IActionResult Register(RegisterRequest model)
+        public IActionResult Register(RegisterRequestModel model)
         {
             _userService.Register(model);
             return Ok(new { message = "Registration successful" });
@@ -63,7 +63,7 @@ namespace Chatty.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, UpdateRequest model)
+        public IActionResult Update(int id, UpdateRequestModel model)
         {
             _userService.Update(id, model);
             return Ok(new { message = "User updated successfully" });
